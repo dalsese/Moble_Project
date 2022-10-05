@@ -1,7 +1,7 @@
 {
-    "board": "arduino:avr:nano",
+    "board": "arduino:megaavr:uno2018",
     "sketch": "app.ino",
-    "configuration": "cpu=atmega328",
-    "port": "COM6",
-    "programmer": "arduino:avrisp"
+    "port": "COM5",
+    "programmer": "arduino:avrisp",
+    "configuration": "mode=on"
 }
