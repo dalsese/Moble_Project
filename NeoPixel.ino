@@ -1,14 +1,14 @@
 // #include <Adafruit_NeoPixel.h>
 
-// #define PIN2 2
-// #define PIN3 3
+// #define PIN4 4
+// #define PIN5 5
 
 // //네오픽셀을 사용하기 위해 객체 하나를 생성한다. 
 // //첫번째 인자값은 네오픽셀의 LED의 개수
 // //두번째 인자값은 네오픽셀이 연결된 아두이노의 핀번호
 // //세번째 인자값은 네오픽셀의 타입에 따라 바뀌는 flag
-// Adafruit_NeoPixel strip = Adafruit_NeoPixel(5, PIN2, NEO_GRB + NEO_KHZ800);
-// Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(5, PIN3, NEO_GRB + NEO_KHZ800);
+// Adafruit_NeoPixel strip = Adafruit_NeoPixel(5, PIN4, NEO_GRB + NEO_KHZ800);
+// Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(5, PIN5, NEO_GRB + NEO_KHZ800);
 
 // // GRBW 라는 것도 있음, 오작동시 GRBW로 동작해볼 것
 
