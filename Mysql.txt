@@ -1,0 +1,5 @@
+#include <MySQL_Connection.h>
+#include <MySQL_Cursor.h>
+#include <MySQL_Encrypt_Sha1.h>
+#include <MySQL_Packet.h>
+

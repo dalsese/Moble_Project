@@ -1,7 +1,6 @@
 {
-    "board": "arduino:megaavr:uno2018",
-    "sketch": "app.ino",
-    "port": "COM5",
-    "programmer": "arduino:avrisp",
-    "configuration": "mode=on"
+    "board": "arduino:avr:uno",
+    "sketch": "Finger.ino",
+    "port": "COM8",
+    "programmer": "arduino:avrisp"
 }
