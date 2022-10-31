@@ -1,12 +1,13 @@
+// #include <Servo.h>
+
+// Servo servo;
+
 // void setup()
 // {
-//     pinMode(3,OUTPUT);
+//     servo.attach(7);
 // }
-
-
 
 // void loop()
 // {
-//     digitalWrite(3,HIGH);
-//     delay(500);
+//     servo.write(40);
 // }

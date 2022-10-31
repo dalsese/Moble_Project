@@ -1,0 +1,17 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\moble\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.5\\cores\\arduino"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\moble\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.5\\variants\\standard"
+  },
+  {
+    "Sourcefile": "c:\\Last_Project\\Moble_Project\\build\\sketch\\app.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]

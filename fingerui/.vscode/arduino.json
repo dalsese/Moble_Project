@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "FingerUI.ino",
+    "port": "COM8",
+    "programmer": "arduino:avrisp"
+}
