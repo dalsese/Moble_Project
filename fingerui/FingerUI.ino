@@ -1,69 +1,90 @@
-// #include <Dhcp.h>
-// #include <Dns.h>
-// #include <Ethernet.h>
-// #include <EthernetClient.h>
-// #include <EthernetServer.h>
-// #include <EthernetUdp.h>
-// #include <MySQL_Connection.h>
-// #include <MySQL_Cursor.h>
-// #include <MySQL_Encrypt_Sha1.h>
-// #include <MySQL_Packet.h>
 #include <Adafruit_Fingerprint.h>
 #include <Adafruit_NeoPixel.h>
 #include <Servo.h>
 
-#define PIN4 5
-#define PIN6 4
-#define MOTOR_PIN 16
+#define LED1 15
+#define LED2 5
 
-Adafruit_NeoPixel led1 = Adafruit_NeoPixel(5, PIN4, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel led2 = Adafruit_NeoPixel(5, PIN6, NEO_GRB + NEO_KHZ800);
+#define DRIVEDOOR 2
+#define SECONDDOOR 14
+#define SEATMAIN 12
+#define SEATSECO 13
 
-SoftwareSerial mySerial(0, 2); // 일반 디지털 핀을 시리얼 통신 포트로 사용하게 해줌
+Adafruit_NeoPixel led1 = Adafruit_NeoPixel(5, LED1, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel led2 = Adafruit_NeoPixel(5, LED2, NEO_GRB + NEO_KHZ800);
+
+SoftwareSerial mySerial(4, 0); // 일반 디지털 핀을 시리얼 통신 포트로 사용하게 해줌
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
-Servo door;
+Servo door1, door2, seat1, seat2;
 
-// byte mac_addr [] = { 0xA8, 0x48, 0xFA, 0xFF, 0xF5, 0xFF};
-
-// IPAddress server_addr(35, 74, 75, 58);
-
-// char user[] = "user3";
-// char password[] = "12345678";
-
-// char INSERT_SQL [] = "INSERT INTO testdb.test_table (user_angle) VALUES ('60')";
-
-// EthernetClient client;
-// MySQL_Connection conn((Client *)&client);
 
 void door_OPEN()
 {
-  door.attach(MOTOR_PIN);
-  door.write(0); // 0도는 잠금해제 각도.
   delay(100);
-  door.detach();
+  door1.attach(DRIVEDOOR);
+  door1.write(170); 
+  delay(100);
+  door1.detach();
 }
 
 void door_CLOSE()
 {
-  door.attach(MOTOR_PIN);
-  door.write(90); // 90도를 차량 잠금이라고 설정한다.
+  // delay(100);
+  door1.attach(DRIVEDOOR);
+
+  door1.write(5);
   delay(100);
-  door.detach();
+  door1.detach();
+}
+void doorSide_OPEN()
+{
+  delay(100);
+  door2.attach(SECONDDOOR);
+  door2.write(170);
+  delay(100);
+  door2.detach();
+}
+
+void doorSide_CLOSE()
+{
+  delay(100);
+  door2.attach(SECONDDOOR);
+  door2.write(5);
+  delay(100);
+  door2.detach();
+}
+void Seat_Angle()
+{
+  delay(100);
+  seat1.attach(SEATMAIN);
+  seat1.write(90);
+  delay(100);
+  seat1.detach();
+}
+
+void SideSeat_Angle()
+{
+  delay(100);
+  seat2.attach(SEATSECO);
+  seat2.write(90);
+  delay(100);
+  seat2.detach();
 }
 
 void setup()  
 {
   Serial.begin(115200); // 원래는 9600 
   finger.begin(57600);
-  delay(100);
+  door_CLOSE();
+  doorSide_CLOSE();
   led1.begin();  //네오픽셀을 초기화하기 위해 모든LED를 off시킨다
   led2.begin();
   led1.show(); // 램의 픽셀 데이터를 Adafruit_NeoPixel에 전송
   led2.show();
-  door_CLOSE();
 
-
+  seat1.detach();
+  seat2.detach();
 
   while (!Serial); // For Yun/Leo/Micro/Zero/...
   delay(100);
@@ -141,29 +162,7 @@ void rainbowCycle(uint8_t wait) {
 }
 
 void loop()                     // run over and over again
-{
-  delay(2000);
-  // while (!Serial);
-  // Ethernet.begin(mac_addr);
-  // if (conn.connect(server_addr, 3306, user, password))
-  // {
-  //   delay(1000);
-  //   // Serial.println("Recording data.");
-  //   // MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);
-  //   // cur_mem->execute(INSERT_SQL);
-  //   // delete cur_mem;
-  // }
-
-  // else
-  // {
-  //   Serial.println("DB connection failed.");
-  // }
-  
-  // Serial.println("Recording data.");
-  // MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);
-  // cur_mem->execute(INSERT_SQL);
-  // delete cur_mem;
-
+{  
   getFingerprintIDez();
   delay(50); 
   //don't ned to run this at full speed.
@@ -254,10 +253,15 @@ int getFingerprintIDez() {
   if(finger.confidence >= 100) 
   {
     Serial.println("connect..");
-    delay(100);
-    door_OPEN();
     rainbow(20);
     rainbowCycle(20);
+    door_OPEN(); // ??
+    doorSide_OPEN();
+    Seat_Angle();
+    SideSeat_Angle();
+    delay(10000);
+    door_CLOSE(); // ??
+    doorSide_CLOSE();
   }
 
   else
